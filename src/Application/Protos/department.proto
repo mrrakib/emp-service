@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "DepartmentProto";
+
+package department;
+
+// Service definition
+service DepartmentService {
+  rpc GetDepartmentById (DepartmentRequest) returns (DepartmentReply);
+  rpc GetAllDepartments (Empty) returns (DepartmentListReply);
+}
+
+// Messages
+message DepartmentRequest {
+  int32 id = 1;
+}
+
+message DepartmentReply {
+  int32 id = 1;
+  string name = 2;
+  string location = 3;
+}
+
+message DepartmentListReply {
+  repeated DepartmentReply departments = 1;
+}
+
+message Empty {}
