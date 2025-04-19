@@ -14,6 +14,11 @@ builder.Services.AddGrpcClient<DepartmentService.DepartmentServiceClient>(o =>
     o.Address = new Uri("https://localhost:5002"); // ServerService address
 });
 
+builder.Services.AddGrpcClient<CompanyService.CompanyServiceClient>(o =>
+{
+    o.Address = new Uri("https://localhost:5002"); // ServerService address
+});
+
 // (Optional) Register your own wrapper service
 //builder.Services.AddScoped<DepartmentClientService>();
 

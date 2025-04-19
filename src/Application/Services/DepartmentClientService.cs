@@ -23,7 +23,7 @@ public class DepartmentClientService
 
     public async Task<DepartmentListReply> GetAllDepartmentsAsync()
     {
-        var response = await _client.GetAllDepartmentsAsync(new Empty());
+        var response = await _client.GetAllDepartmentsAsync(new DepartmentProto.Empty());
         return response;
     }
 }

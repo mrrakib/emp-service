@@ -4,6 +4,7 @@ using HrmBaharu.Application.Features.Employees.Commands.CreateEmployee;
 using HrmBaharu.Application.Features.Employees.Commands.DeleteEmployee;
 using HrmBaharu.Application.Features.Employees.Commands.UpdateEmployee;
 using DepartmentProto;
+using HrmBaharu.Application.Services;
 
 namespace HrmBaharu.Web.Endpoints;
 
@@ -12,7 +13,7 @@ public class Employees : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .RequireAuthorization()
+            //.RequireAuthorization()
             .MapGet(GetEmployeesWithPagination)
             .MapPost(CreateEmployee)
             .MapPut(UpdateEmployee, "{id}")
@@ -22,9 +23,11 @@ public class Employees : EndpointGroupBase
     {
         return sender.Send(query);
     }
-    public async Task<int> CreateEmployee(ISender sender, DepartmentService.DepartmentServiceClient departmentClient, CreateEmployeeCommand command)
+    public async Task<int> CreateEmployee(ISender sender, DepartmentService.DepartmentServiceClient departmentClient, CompanyService.CompanyServiceClient companyClient, CreateEmployeeCommand command)
     {
-        var grpcResponse = await departmentClient.GetAllDepartmentsAsync(new Empty());
+        var grpcResponse = await departmentClient.GetAllDepartmentsAsync(new DepartmentProto.Empty());
+
+        var grpcCompanyResponse = await companyClient.GetAllCompaniesAsync(new Application.Services.Empty());
 
         return await sender.Send(command);
     }
