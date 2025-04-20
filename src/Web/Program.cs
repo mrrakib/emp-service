@@ -1,6 +1,6 @@
-using DepartmentProto;
-using HrmBaharu.Application.Services;
-using HrmBaharu.Infrastructure.Data;
+
+using HrmBaharu.Application.GRPCServices.Department;
+using HrmBaharu.Application.GRPCServices.Company;
 
 var builder = WebApplication.CreateBuilder(args);
 

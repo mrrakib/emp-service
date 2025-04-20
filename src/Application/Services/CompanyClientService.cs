@@ -1,4 +1,4 @@
-﻿using DepartmentProto;
+﻿using HrmBaharu.Application.GRPCServices.Company;
 using Grpc.Net.Client;
 
 namespace HrmBaharu.Application.Services;

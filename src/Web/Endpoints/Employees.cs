@@ -3,8 +3,8 @@ using HrmBaharu.Application.Features.Employees.Queries.GetEmployeesWithPaginatio
 using HrmBaharu.Application.Features.Employees.Commands.CreateEmployee;
 using HrmBaharu.Application.Features.Employees.Commands.DeleteEmployee;
 using HrmBaharu.Application.Features.Employees.Commands.UpdateEmployee;
-using DepartmentProto;
-using HrmBaharu.Application.Services;
+using HrmBaharu.Application.GRPCServices.Department;
+using HrmBaharu.Application.GRPCServices.Company;
 
 namespace HrmBaharu.Web.Endpoints;
 
@@ -25,9 +25,9 @@ public class Employees : EndpointGroupBase
     }
     public async Task<int> CreateEmployee(ISender sender, DepartmentService.DepartmentServiceClient departmentClient, CompanyService.CompanyServiceClient companyClient, CreateEmployeeCommand command)
     {
-        var grpcResponse = await departmentClient.GetAllDepartmentsAsync(new DepartmentProto.Empty());
+        var grpcResponse = await departmentClient.GetAllDepartmentsAsync(new Application.GRPCServices.Department.Empty());
 
-        var grpcCompanyResponse = await companyClient.GetAllCompaniesAsync(new Application.Services.Empty());
+        var grpcCompanyResponse = await companyClient.GetAllCompaniesAsync(new Application.GRPCServices.Company.Empty());
 
         return await sender.Send(command);
     }

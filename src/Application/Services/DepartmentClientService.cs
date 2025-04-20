@@ -1,4 +1,5 @@
-﻿using DepartmentProto;
+﻿using HrmBaharu.Application.GRPCServices.Department;
+
 using Grpc.Net.Client;
 
 namespace HrmBaharu.Application.Services;
@@ -23,7 +24,7 @@ public class DepartmentClientService
 
     public async Task<DepartmentListReply> GetAllDepartmentsAsync()
     {
-        var response = await _client.GetAllDepartmentsAsync(new DepartmentProto.Empty());
+        var response = await _client.GetAllDepartmentsAsync(new Empty());
         return response;
     }
 }
